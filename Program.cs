@@ -1,4 +1,6 @@
-﻿internal class Program
+﻿using System.Runtime.InteropServices;
+
+internal class Program
 {
     //Hoặc viết hàm ở đây
     static void Swap1(int a, int b)
@@ -60,16 +62,54 @@
         string r = "";  //xâu đảo ngược của xâu s
         for (int i = s.Length - 1; i >= 0; i--)
             r = r + s[i];
-        return s==r;
+        return s == r;
+    }
+    //Xây dựng hàm nối 2 xâu
+    static string NoiXau(string s1, string s2)
+    {
+        string result = "";
+        foreach (char v in s1)
+            result = result + v;
+        foreach (char u in s2)
+            result = result + u;
+        return result;
+    }
+    //Kiểm tra xâu con tồn tại trong xâu mẹ không
+    static bool XauChuaXauCon(string mother, string child)
+    {
+        string sub = "";
+        for (int i = 0; i < mother.Length - child.Length + 1; i++)
+        {
+            for (int j = i; j < i+child.Length; j++)
+            {
+                sub = sub + mother[j];
+            }
+            if (sub == child)
+                return true;
+            sub = "";
+        }
+        return false;
     }
     private static void Main(string[] args)
     {
+        string mother = "Toi di hoc";
+        string child = "hoc";
+        if (XauChuaXauCon(mother, child))
+            Console.WriteLine("Xâu mẹ chứa xâu con");
+        else
+            Console.WriteLine("Xâu mẹ KHÔNG chứa xâu con");
+        /*
+        string s = "Toi", t = " ", r = "di";
+        Console.WriteLine(NoiXau(NoiXau(s, t), r));
+        */
+        /*
         int so = 131;
         bool NT, CP, DX;
         KT_NT_CP_DX(so, out NT, out CP, out DX);
         Console.WriteLine(NT ? $"{so} là NT" : $"{so} không là NT");
         Console.WriteLine(CP ? $"{so} là CP" : $"{so} không là CP");
         Console.WriteLine(DX ? $"{so} là DX" : $"{so} không là DX");
+        */
         /*
         double R = 4;
         double C = 0, S = 0;
